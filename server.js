@@ -51,6 +51,31 @@ app.get("/weather", async (req, res) => {
   }
 });
 
+app.get("/api/weather", async (req, res) => {
+  const { lat, lon } = req.query;
+  if (!lat || !lon) {
+    return res.status(400).json({ error: "No lat, lon" });
+  }
+
+  try {
+    const response = await axios.get(
+      "https://api.openweathermap.org/data/2.5/weather",
+      {
+        params: {
+          lat,
+          lon,
+          units: "metric",
+          appid: API_KEY,
+        },
+      }
+    );
+    return res.json(response.data);
+  } catch (err) {
+    console.error("Error on request to OpenWeatherMap:", err.response?.data || err.message);
+    return res.status(500).json({ error: "Can't get data about weather" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server: http://localhost:${PORT}`);
 });

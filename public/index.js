@@ -1,6 +1,3 @@
-require("dotenv");
-const API_KEY = process.env.API_KEY;
-
 window.addEventListener("load", () => {
   if (!navigator.geolocation) {
     console.log("Geolocation is not supported by this browser.");
@@ -11,17 +8,12 @@ window.addEventListener("load", () => {
 
 async function handlePosition({ coords: { latitude, longitude } }) {
   try {
-    const response = await axios.get(
-      "https://api.openweathermap.org/data/2.5/weather",
-      {
-        params: {
-          lat: latitude,
-          lon: longitude,
-          appid: API_KEY,
-          units: "metric",
+    const response = await axios.get("/api/weather", {
+          params: {
+            lat: latitude,
+            lon: longitude,
         },
-      }
-    );
+    });
 
     const { name: city } = response.data;
     const citiesContainer = document.querySelector(".container-city");
