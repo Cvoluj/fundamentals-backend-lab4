@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>weather</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/index.css" />
+  </head>
+<body>
+  <div class="container">
+    <p>Click to see the weather</p>
+    <div class="container-city"></div>
+    {{#each cities}}
+    <a href="/weather/{{this}}" class="btn_to_weather">{{this}}</a>
+    {{/each}}
+  </div>
+  <script src="/index.js"></script>
+
+</body>
+</html>
+
